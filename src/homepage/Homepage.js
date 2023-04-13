@@ -1,5 +1,12 @@
 import {useNavigation, useTheme} from '@react-navigation/native';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  BackHandler,
+} from 'react-native';
 import firebase from 'firebase/compat';
 import {useEffect} from 'react';
 
@@ -35,6 +42,20 @@ const HomeScreen = () => {
     });
 
     return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const backAction = () => {
+      // Do nothing when back button is pressed
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
   }, []);
   return (
     <View style={style.container}>

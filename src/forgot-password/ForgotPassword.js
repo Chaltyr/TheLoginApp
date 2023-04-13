@@ -30,6 +30,7 @@ const ForgotPassword = () => {
       .sendPasswordResetEmail(email)
       .then(() => {
         alert('Password reset has been sent to ' + email);
+        setEmail('');
         navigation.navigate('Login');
       })
       .catch(error => {

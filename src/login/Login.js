@@ -15,6 +15,10 @@ const Login = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
 
+  const setInitialState = () => {
+    setEmail('');
+    setPassword('');
+  };
   const handleLogIn = async () => {
     console.log('Logging In...');
     const strongRegex = new RegExp(
@@ -87,6 +91,13 @@ const Login = () => {
         navigation.navigate('Home');
       }
     });
+  }, []);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setInitialState();
+    });
+
+    return unsubscribe;
   }, []);
 
   return (
